@@ -1,0 +1,56 @@
+server:
+  Name: "Go Clean Architecture Example"
+  AppVersion: 1.0.0
+  BaseURI: 127.0.0.1:5000
+  Port: :5000
+  Mode: Prod
+  ReadTimeout: 5
+  WriteTimeout: 5
+  SSL: true
+  CtxDefaultTimeout: 12
+  CSRF: true
+  Debug: false
+  GrRunningThreshold: 100
+  GcPauseThreshold: 10
+  CacheDeploymentType: 1
+
+logger:
+  Development: true
+  DisableCaller: false
+  DisableStacktrace: false
+  Encoding: console
+  Level: info
+
+postgres:
+  PostgresqlHost: localhost
+  PostgresqlPort: 5432
+  PostgresqlUser: postgres
+  PostgresqlPassword: postgres
+  PostgresqlDbname: auth_db
+  PostgresqlSslmode: false
+  PgDriver: pgx
+
+redis:
+  RedisAddr: ${REDIS_HOST}:${REDIS_PORT}
+  RedisPassword: ${REDIS_PASSWORD}
+  RedisDb: 0
+  RedisDefaultdb: 0
+  MinIdleConns: 200
+  PoolSize: 12000
+  PoolTimeout: 240
+  Password: ""
+  DB: 0
+
+mongodb:
+  MongoURI: uristring
+  MongoUser: user
+  MongoPassword: password
+  connectTimeout: 30
+  maxConnIdleTime: 180
+  minPoolSize: 20
+  maxPoolSize: 300
+
+authorization:
+  CasbinModelFilePath: ./config/casbin/rbac_model.conf
+  CasbinPolicyFilePath: ./config/casbin/policy.csv
+  JWTSecret: secret
