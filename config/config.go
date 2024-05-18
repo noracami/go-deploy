@@ -71,7 +71,7 @@ type PostgresConfig struct {
 
 // RedisConfig struct
 type RedisConfig struct {
-	Address     string
+	Address     string `mapstructure:"secret_key"`
 	Password    string
 	DefaultDb   string
 	MinIdleCons int
@@ -128,6 +128,7 @@ func NewConfig() (*Configuration, error) {
 	}
 	v.AutomaticEnv()
 	v.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
+	print(v.Get("redis.Address"))
 
 	err := v.Unmarshal(&DefaultConfig)
 	if err != nil {
