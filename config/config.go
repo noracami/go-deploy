@@ -2,10 +2,8 @@ package config
 
 import (
 	"errors"
-	"fmt"
 	"log"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/google/wire"
@@ -121,16 +119,17 @@ func NewConfig() (*Configuration, error) {
 
 	v.SetConfigName(path)
 	v.AddConfigPath(".")
+	v.AutomaticEnv()
 	if err := v.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			return nil, errors.New("config file not found")
 		}
 		return nil, err
 	}
-	v.AutomaticEnv()
-	v.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
-	fmt.Println(v.Get("REDIS.ADDRESS"))
-	fmt.Println(v.Get("redis.Address"))
+	// v.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
+	// fmt.Println(v.Get("REDIS.ADDRESS"))
+	// fmt.Println(v.Get("redis.Address"))
+	// v.Set("redis.Address", os.Getenv("REDIS_ADDRESS"))
 
 	err := v.Unmarshal(&DefaultConfig)
 	if err != nil {

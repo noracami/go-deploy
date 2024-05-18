@@ -2,10 +2,12 @@ package redis
 
 import (
 	"context"
-	"github.com/redis/go-redis/v9"
+	"fmt"
 	"go-clean-arch-game-server/config"
 	"strings"
 	"time"
+
+	"github.com/redis/go-redis/v9"
 )
 
 const (
@@ -51,6 +53,8 @@ func NewClusterConn(cfg *config.Configuration) (*ClusterClient, error) {
 // NewStandaloneConn returns new redis client
 func NewStandaloneConn(cfg *config.Configuration) (*StandaloneClient, error) {
 	redisHost := cfg.Redis.Address
+
+	fmt.Println("redisHost: ", redisHost)
 
 	if redisHost == "" {
 		redisHost = ":6379"
