@@ -121,7 +121,7 @@ func NewConfig() (*Configuration, error) {
 	v.SetConfigName(path)
 	v.AddConfigPath(".")
 	v.AutomaticEnv()
-	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+	v.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
 	if err := v.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			return nil, errors.New("config file not found")
