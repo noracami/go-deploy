@@ -2,11 +2,13 @@ package config
 
 import (
 	"errors"
-	"github.com/google/wire"
-	"github.com/spf13/viper"
 	"log"
 	"os"
+	"strings"
 	"time"
+
+	"github.com/google/wire"
+	"github.com/spf13/viper"
 )
 
 var Set = wire.NewSet(NewConfig)
@@ -119,6 +121,7 @@ func NewConfig() (*Configuration, error) {
 	v.SetConfigName(path)
 	v.AddConfigPath(".")
 	v.AutomaticEnv()
+	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
 	if err := v.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			return nil, errors.New("config file not found")
