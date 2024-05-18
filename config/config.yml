@@ -1,8 +1,8 @@
 server:
   Name: "Go Clean Architecture Example"
   AppVersion: 1.0.0
-  BaseURI: 127.0.0.1:5000
-  Port: :5000
+  BaseURI: 127.0.0.1:8080
+  Port: :8080
   Mode: Prod
   ReadTimeout: 5
   WriteTimeout: 5
@@ -31,13 +31,14 @@ postgres:
   PgDriver: pgx
 
 redis:
-  Address: ${REDIS_HOST}:${REDIS_PORT}
-  Password: ${REDIS_PASSWORD}
+  RedisAddr: localhost:6379
+  RedisPassword:
   RedisDb: 0
   RedisDefaultdb: 0
   MinIdleConns: 200
   PoolSize: 12000
   PoolTimeout: 240
+  Password: ""
   DB: 0
 
 mongodb:

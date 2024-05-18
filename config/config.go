@@ -4,7 +4,6 @@ import (
 	"errors"
 	"log"
 	"os"
-	"strings"
 	"time"
 
 	"github.com/google/wire"
@@ -71,7 +70,7 @@ type PostgresConfig struct {
 
 // RedisConfig struct
 type RedisConfig struct {
-	Address     string `mapstructure:"secret_key"`
+	Address     string
 	Password    string
 	DefaultDb   string
 	MinIdleCons int
@@ -120,17 +119,19 @@ func NewConfig() (*Configuration, error) {
 
 	v.SetConfigName(path)
 	v.AddConfigPath(".")
-	v.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
-	v.AutomaticEnv()
+
 	if err := v.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			return nil, errors.New("config file not found")
 		}
 		return nil, err
 	}
-	// fmt.Println(v.Get("REDIS.ADDRESS"))
-	// fmt.Println(v.Get("redis.Address"))
-	// v.Set("redis.Address", os.Getenv("REDIS_ADDRESS"))
+
+	// HACK: explicitly set redis env
+	// v.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
+	v.AutomaticEnv()
+	v.BindEnv("redis.Address", "REDIS_ADDRESS")
+	v.BindEnv("redis.Password", "REDIS_PASSWORD")
 
 	err := v.Unmarshal(&DefaultConfig)
 	if err != nil {

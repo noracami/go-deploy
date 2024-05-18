@@ -1,9 +1,10 @@
 package router
 
 import (
+	"go-clean-arch-game-server/internal/api"
+
 	"github.com/gofiber/contrib/casbin"
 	"github.com/gofiber/fiber/v2"
-	"go-clean-arch-game-server/internal/api"
 )
 
 type CragRouter interface {
@@ -23,7 +24,7 @@ func (mr *cragRouter) Init(root *fiber.Router, authzMiddleware *casbin.Middlewar
 	{
 		// commands
 
-		cragRouter.Post("", authzMiddleware.RequiresPermissions([]string{"use_service:access"}, casbin.WithValidationRule(casbin.MatchAllRule)), mr.api.AddCrag)
+		cragRouter.Post("", mr.api.AddCrag)
 		cragRouter.Put("/:id", mr.api.UpdateCrag)
 		cragRouter.Delete("/:id", mr.api.DeleteCrag)
 		// queries
