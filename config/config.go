@@ -133,6 +133,9 @@ func NewConfig() (*Configuration, error) {
 	v.BindEnv("redis.Address", "REDIS_ADDRESS")
 	v.BindEnv("redis.Password", "REDIS_PASSWORD")
 
+	// BaseURI
+	v.BindEnv("server.BaseURI", "ZEABUR_URL")
+
 	err := v.Unmarshal(&DefaultConfig)
 	if err != nil {
 		log.Printf("unable to decode into struct, %v", err)
