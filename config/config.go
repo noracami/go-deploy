@@ -2,6 +2,7 @@ package config
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -128,7 +129,8 @@ func NewConfig() (*Configuration, error) {
 	}
 	v.AutomaticEnv()
 	v.SetEnvKeyReplacer(strings.NewReplacer(`.`, `_`))
-	print(v.Get("redis.Address"))
+	fmt.Println(v.Get("REDIS.ADDRESS"))
+	fmt.Println(v.Get("redis.Address"))
 
 	err := v.Unmarshal(&DefaultConfig)
 	if err != nil {
