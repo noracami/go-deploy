@@ -134,7 +134,7 @@ func NewConfig() (*Configuration, error) {
 	v.BindEnv("redis.Password", "REDIS_PASSWORD")
 
 	// BaseURI
-	v.BindEnv("server.BaseURI", "ZEABUR_WEB_URL")
+	v.BindEnv("server.BaseURI", "ZEABUR_WEB_DOMAIN")
 
 	err := v.Unmarshal(&DefaultConfig)
 	if err != nil {
