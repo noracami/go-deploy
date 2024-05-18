@@ -9,13 +9,13 @@ MIGRATION_DIR = $(PWD)/migrations
 
 setup:
 	go mod tidy
-	sudo go install github.com/google/wire/cmd/wire@latest
-	sudo go install github.com/swaggo/swag/cmd/swag@latest
+	go install github.com/google/wire/cmd/wire@latest
+	go install github.com/swaggo/swag/cmd/swag@latest
 
 test:
 	go test ./...
 
-# remove binary		
+# remove binary
 clean:
 	echo "remove bin exe"
 	rm -rf $(BUILD_DIR)
