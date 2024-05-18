@@ -31,14 +31,13 @@ postgres:
   PgDriver: pgx
 
 redis:
-  RedisAddr: ${REDIS_HOST}:${REDIS_PORT}
-  RedisPassword: ${REDIS_PASSWORD}
+  Address: ${REDIS_HOST}:${REDIS_PORT}
+  Password: ${REDIS_PASSWORD}
   RedisDb: 0
   RedisDefaultdb: 0
   MinIdleConns: 200
   PoolSize: 12000
   PoolTimeout: 240
-  Password: ""
   DB: 0
 
 mongodb:
